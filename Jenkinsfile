@@ -20,6 +20,7 @@ pipeline {
 
         stage('Run Container') {
             steps {
+                sh 'docker rm -f flask-container || true'
                 sh 'docker run -d --name flask-container -p 8081:8081 $DOCKER_IMAGE'
                 sleep 10  // Wait for the container to start
             }
