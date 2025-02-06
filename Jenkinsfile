@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/devpremoli/your-repo.git'
+                checkout scm
             }
         }
 
