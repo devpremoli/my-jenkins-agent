@@ -28,7 +28,10 @@ pipeline {
 
         stage('Test Application') {
             steps {
-                sh 'curl -f http://host.docker.internal:8081 || (docker logs flask-container && exit 1)'
+                script {
+                    def container_ip = sh(script: "docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' flask-container", returnStdout: true).trim()
+                    sh "curl -f http://${container_ip}:8081 || (docker logs flask-container && exit 1)"
+                }
             }
         }
 
