@@ -27,7 +27,7 @@ pipeline {
 
         stage('Test Application') {
             steps {
-                sh 'curl -f http://localhost:8081 || (docker logs flask-container && exit 1)'
+                sh 'curl -f http://host.docker.internal:8081 || (docker logs flask-container && exit 1)'
             }
         }
 
